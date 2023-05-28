@@ -1,0 +1,13 @@
+/* pages/main-video/main-video.wxss */
+
+.video-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.video-list .item{
+  box-sizing: border-box;
+  width: 50%;
+  padding: 0 10rpx;
+}
