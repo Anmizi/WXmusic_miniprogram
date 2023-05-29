@@ -1,0 +1,24 @@
+/* pages/playlist-detail/playlist-detail.wxss */
+.playlist-detail{
+  margin: 0 24rpx;
+  overflow: hidden;
+}
+.playlist-item{
+  margin-bottom: 20rpx;
+}
+.playlist-item .cat{
+  font-size: 40rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+.playlist-item .list{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20rpx;
+}
+.playlist-item .list > .item{
+  flex-shrink: 0;
+  width: 33.33%;
+  box-sizing: border-box;
+  padding-right: 20rpx;
+}

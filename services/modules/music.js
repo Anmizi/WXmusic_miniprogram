@@ -11,7 +11,24 @@ export const getMusicBanner = (type = 0) => {
 }
 export const getPlayListDetail = (id) => {
   return wxRequest.get({
-    url:'/playlist/detail',
-    data:{id}
+    url: '/playlist/detail',
+    data: {
+      id
+    }
+  })
+}
+export const getHotPlaylist = (cat = '全部', limit = 6, offset = 0) => {
+  return wxRequest.get({
+    url: '/top/playlist/',
+    data: {
+      cat,
+      limit,
+      offset
+    }
+  })
+}
+export const getAllPlayList = () => {
+  return wxRequest.get({
+    url:'/playlist/hot'
   })
 }

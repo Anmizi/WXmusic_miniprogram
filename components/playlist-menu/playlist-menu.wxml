@@ -1,0 +1,8 @@
+<view class="playlist-menu">
+  <area-header class="header" title="{{title}}" hasMore="{{hasMore}}" bind:moreClick="onMoreClick" />
+  <scroll-view scroll-x class="list" enable-flex>
+    <block wx:for="{{itemList}}" wx:key="id">
+      <playlist-item-v1 class="item" itemData="{{item}}" />
+    </block>
+  </scroll-view>
+</view>

@@ -1,6 +1,6 @@
 import {
   getMusicBanner,
-  getPlayListDetail
+  getHotPlaylist
 } from '../../services/modules/music';
 import {
   querySelector
@@ -15,7 +15,9 @@ Page({
     searchValue: '',
     bannerList: [],
     bannerHeight: 130,
-    recommendSongs:[]
+    recommendSongs:[],
+    hotPlaylist:[],
+    recommendPlaylist:[]
   },
 
   /**
@@ -24,6 +26,8 @@ Page({
   onLoad() {
     this.fetchMusicBanner()
     this.fetchRecommendSongs()
+    this.fetchHotPlaylist()
+    this.fetchRecommendPlaylist()
   },
   //请求获取数据方法
   async fetchMusicBanner() {
@@ -37,6 +41,14 @@ Page({
       this.setData({recommendSongs:value.slice(0,6)})
     })
     recommendStore.dispatch('fetchRecommendSongsAction')
+  },
+  async fetchHotPlaylist(){
+    const res = await getHotPlaylist()
+    this.setData({hotPlaylist:res.playlists})
+  },
+  async fetchRecommendPlaylist(){
+    const res = await getHotPlaylist('华语')
+    this.setData({recommendPlaylist:res.playlists})
   },
   //事件处理函数
   onSearchClick() {

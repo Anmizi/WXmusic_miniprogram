@@ -1,0 +1,37 @@
+.playlist-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 10rpx;
+}
+
+.cover .playcount {
+  position: absolute;
+  font-size: 20rpx;
+  color: #fff;
+  bottom: 8rpx;
+  right: 8rpx;
+  padding: 4rpx 8rpx;
+  border-radius: 10rpx;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.cover .image {
+  width: 100%;
+  vertical-align: top;
+}
+
+.desc {
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
