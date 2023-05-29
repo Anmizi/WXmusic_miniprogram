@@ -1,0 +1,27 @@
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="ranking-item" wx:if="{{itemData.tracks}}">
+  <view class="info">
+    <view class="title">
+      {{itemData.name}}
+    </view>
+    <view class="songs">
+      <block wx:for="{{3}}" wx:key="*this">
+        <view class="song-info">
+          {{index+1}}.{{itemData.tracks[item].name}} - {{itemData.tracks[item].ar[0].name}}
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="cover">
+    <image src="{{itemData.coverImgUrl}}?param=100y100" class="image" mode="widthFix"/>
+    <view class="playcount">
+      
+      {{fmt.formatCount(itemData.playCount)}}
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <van-skeleton title row="4" />
+</view>

@@ -1,5 +1,5 @@
 // pages/detail-song/detail-song.js
-import {recommendStore} from '../../store/recommendSong'
+import {recommendStore} from '../../store/recommendStore'
 Page({
 
   /**

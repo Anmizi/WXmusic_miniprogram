@@ -5,7 +5,8 @@ import {
 import {
   querySelector
 } from '../../utils/query-selector';
-import {recommendStore} from '../../store/recommendSong'
+import {recommendStore} from '../../store/recommendStore'
+import {rankingStore} from '../../store/rankingStore'
 Page({
 
   /**
@@ -17,7 +18,8 @@ Page({
     bannerHeight: 130,
     recommendSongs:[],
     hotPlaylist:[],
-    recommendPlaylist:[]
+    recommendPlaylist:[],
+    rankingInfo:{}
   },
 
   /**
@@ -28,6 +30,7 @@ Page({
     this.fetchRecommendSongs()
     this.fetchHotPlaylist()
     this.fetchRecommendPlaylist()
+    this.fetchRankingData()
   },
   //请求获取数据方法
   async fetchMusicBanner() {
@@ -50,6 +53,12 @@ Page({
     const res = await getHotPlaylist('华语')
     this.setData({recommendPlaylist:res.playlists})
   },
+  fetchRankingData(){
+    rankingStore.onStates(['newRanking','originRanking','upRanking'],value=>{
+      this.setData({rankingInfo:{...this.data.rankingInfo,...value}})
+    })
+    rankingStore.dispatch('fetchRankingDataAction')
+  },  
   //事件处理函数
   onSearchClick() {
     wx.navigateTo({
