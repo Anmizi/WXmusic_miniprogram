@@ -11,3 +11,26 @@ export const getTopMv = (offset = 0, limit = 20) => {
     }
   })
 }
+export const getMvUrl = (id) => {
+  return wxRequest.get({
+    url:'/mv/url',
+    data:{
+      id
+    }
+  })
+}
+
+export const getMvInfo = (id) => {
+  return wxRequest.get({
+    url:'/mv/detail',
+    data:{
+      mvid:id
+    }
+  })
+}
+export const getMvRelated = (id) => {
+  return wxRequest.get({
+    url:'/related/allvideo',
+    data:{id}
+  })
+}

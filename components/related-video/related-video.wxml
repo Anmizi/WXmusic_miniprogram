@@ -1,0 +1,17 @@
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="related-video">
+  <view class="cover">
+    <image src="{{itemData.coverUrl}}" lazy-load class="image" mode="widthFix"/>
+    <view class="duration">
+      {{fmt.formatTime(itemData.durationms)}}
+    </view>
+  </view>
+  <view class="info">
+    <view class="title">{{itemData.title}}</view>
+    <view class="creator">
+      {{itemData.creator[0].userName}}
+    </view>
+  </view>
+</view>

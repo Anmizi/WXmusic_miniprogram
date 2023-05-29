@@ -1,7 +1,7 @@
 <wxs module="format" src="/utils/format.wxs"></wxs>
 <view class="item">
   <view class="album">
-    <image src="{{itemData.cover}}" mode="widthFix" class="image"/>
+    <image src="{{itemData.cover}}" lazy-load mode="widthFix" class="image"/>
     <view class="info">
       <view class="count">
         {{format.formatCount(itemData.playCount)}}

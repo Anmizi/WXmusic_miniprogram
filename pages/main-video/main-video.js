@@ -49,6 +49,13 @@ Page({
 
       wx.stopPullDownRefresh()
     })
+  },
+  //事假监听处理
+  onItemClick(e){
+    const {id} = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: `/pages/detail-video/detail-video?id=${id}`,
+    })
   }
 
 })

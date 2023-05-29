@@ -1,0 +1,37 @@
+/* pages/detail-video/detail-video.wxss */
+.detail-video{
+  height: 100vh;
+  overflow-y: hidden;
+}
+.detail-video .video{
+  width: 100%;
+  height: 225px;
+}
+.scroll{
+  height:calc(100% - 225px);
+}
+.detail-video .content{
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+.mvInfo .title{
+  font-weight: bold;
+  font-size: 36rpx;
+}
+.mvInfo .artist{
+  font-size: 28rpx;
+  margin: 8rpx auto;
+  color: #a5a7a9;
+}
+.mvInfo .other{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #a5a7a9;
+}
+.related-video{
+  margin-top: 40rpx;
+}
+.related-video .title{
+  margin-bottom: 20rpx;
+}
