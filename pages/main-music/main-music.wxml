@@ -1,2 +1,14 @@
-<!--pages/main-music/main-music.wxml-->
-<text>pages/main-music/main-music.wxml</text>
+<view class="main-music">
+  <van-search value="{{ searchValue }}" shape="round" background="#fafafa" placeholder="请输入搜索关键词" bind:click-input="onSearchClick" />
+  <view class="banner">
+    <swiper class="banner-swiper"
+      circular
+      indicator-dots
+      style="height: {{bannerHeight}}px;"
+    >
+      <swiper-item wx:for="{{bannerList}}" class="item" wx:key="targetId">
+        <image src="{{item.imageUrl}}" bindload="onBannerImageLoad" mode="widthFix" class="image" />
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

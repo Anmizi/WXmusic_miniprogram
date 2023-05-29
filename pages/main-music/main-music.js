@@ -1,66 +1,48 @@
-// pages/main-music/main-music.js
+import {
+  getMusicBanner
+} from '../../services/modules/music';
+import {
+  querySelector
+} from '../../utils/query-selector';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    searchValue: '',
+    bannerList: [],
+    bannerHeight: 130
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  onLoad() {
+    this.fetchMusicBanner()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  //请求获取数据方法
+  async fetchMusicBanner() {
+    const res = await getMusicBanner()
+    this.setData({
+      bannerList: res.banners
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  //事件处理函数
+  onSearchClick() {
+    wx.navigateTo({
+      url: '/pages/detail-search/detail-search',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  onBannerImageLoad() {
+    querySelector('.image')
+      .then(res => {
+        if (this.data.bannerHeight !== res[0].height) {
+          this.setData({
+            bannerHeight: res[0].height
+          })
+        }
+      })
   }
+
 })
