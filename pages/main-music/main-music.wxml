@@ -1,14 +1,18 @@
 <view class="main-music">
   <van-search value="{{ searchValue }}" shape="round" background="#fafafa" placeholder="请输入搜索关键词" bind:click-input="onSearchClick" />
   <view class="banner">
-    <swiper class="banner-swiper"
-      circular
-      indicator-dots
-      style="height: {{bannerHeight}}px;"
-    >
+    <swiper class="banner-swiper" circular indicator-dots autoplay style="height: {{bannerHeight}}px;">
       <swiper-item wx:for="{{bannerList}}" class="item" wx:key="targetId">
         <image src="{{item.imageUrl}}" bindload="onBannerImageLoad" mode="widthFix" class="image" />
       </swiper-item>
     </swiper>
+  </view>
+  <view class="recommend">
+    <area-header title="推荐视频" bind:moreClick="onMoreClick" />
+    <view class="list">
+      <block wx:for="{{recommendSongs}}" wx:key="id">
+        <song-item-v1 itemData="{{item}}" />
+      </block>
+    </view>
   </view>
 </view>

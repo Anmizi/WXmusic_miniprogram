@@ -1,9 +1,11 @@
 import {
-  getMusicBanner
+  getMusicBanner,
+  getPlayListDetail
 } from '../../services/modules/music';
 import {
   querySelector
 } from '../../utils/query-selector';
+import {recommendStore} from '../../store/recommendSong'
 Page({
 
   /**
@@ -12,7 +14,8 @@ Page({
   data: {
     searchValue: '',
     bannerList: [],
-    bannerHeight: 130
+    bannerHeight: 130,
+    recommendSongs:[]
   },
 
   /**
@@ -20,6 +23,7 @@ Page({
    */
   onLoad() {
     this.fetchMusicBanner()
+    this.fetchRecommendSongs()
   },
   //请求获取数据方法
   async fetchMusicBanner() {
@@ -27,6 +31,12 @@ Page({
     this.setData({
       bannerList: res.banners
     })
+  },
+  fetchRecommendSongs(){
+    recommendStore.onState('recommendSongs',value=>{
+      this.setData({recommendSongs:value.slice(0,6)})
+    })
+    recommendStore.dispatch('fetchRecommendSongsAction')
   },
   //事件处理函数
   onSearchClick() {
@@ -43,6 +53,11 @@ Page({
           })
         }
       })
+  },
+  onMoreClick(){
+    wx.navigateTo({
+      url: '/pages/detail-song/detail-song',
+    })
   }
 
 })

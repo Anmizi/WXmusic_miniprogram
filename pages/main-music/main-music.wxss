@@ -12,3 +12,6 @@ page{
   border-radius: 8rpx;
   overflow: hidden;
 }
+.recommend .list{
+  overflow: hidden;
+}

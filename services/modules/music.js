@@ -9,3 +9,9 @@ export const getMusicBanner = (type = 0) => {
     }
   })
 }
+export const getPlayListDetail = (id) => {
+  return wxRequest.get({
+    url:'/playlist/detail',
+    data:{id}
+  })
+}

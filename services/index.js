@@ -1,3 +1,4 @@
+import {BASEURL} from './config'
 class WXRequest {
   constructor(baseURL){
     this.baseURL = baseURL
@@ -28,4 +29,4 @@ class WXRequest {
   }
 }
 
-export const wxRequest =  new WXRequest('http://codercba.com:9002')
+export const wxRequest =  new WXRequest(BASEURL)

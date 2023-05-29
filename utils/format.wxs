@@ -31,8 +31,15 @@ function formatTime(time) {
   return padLeft(minute) + ":" + padLeft(second)
 }
 
+function formatArtistsName(artists) {
+  artists =  artists ? artists.map(function(item){
+    return item.name
+  }) : []
+  return artists.join('/')
+}
 // 必须导出后, 才能被其他地方调用: 必须使用CommonJS导出
 module.exports = {
   formatCount: formatCount,
-  formatTime: formatTime
+  formatTime: formatTime,
+  formatArtistsName: formatArtistsName,
 }
