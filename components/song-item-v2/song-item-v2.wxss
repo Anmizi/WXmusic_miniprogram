@@ -1,0 +1,46 @@
+.song-item{
+  display: flex;
+  align-items: center;
+}
+.song-item .index{
+  width: 100rpx;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+}
+.song-item .info{
+  flex: 1;
+  padding: 10rpx 0;
+}
+.info .name{
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.info .bottom{
+  display: flex;
+  align-items: center;
+}
+.bottom .icon{
+  width: 36rpx;
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.bottom .artist{
+  font-size: 24rpx;
+  color: #888;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

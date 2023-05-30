@@ -7,6 +7,10 @@ Component({
     itemData:{
       type:Object,
       value:{}
+    },
+    key:{
+      type:String,
+      value:''
     }
   },
 
@@ -21,6 +25,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onItemClick(){
+      const key = this.properties.key
+      wx.navigateTo({
+        url: `/pages/detail-song/detail-song?type=ranking&key=${key}`,
+      })
+    }
   }
 })

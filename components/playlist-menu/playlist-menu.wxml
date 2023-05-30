@@ -1,4 +1,4 @@
-<view class="playlist-menu">
+<view class="playlist-menu" wx:if="{{itemList.length}}">
   <area-header class="header" title="{{title}}" hasMore="{{hasMore}}" bind:moreClick="onMoreClick" />
   <scroll-view scroll-x class="list" enable-flex>
     <block wx:for="{{itemList}}" wx:key="id">
@@ -6,3 +6,4 @@
     </block>
   </scroll-view>
 </view>
+<van-skeleton title row="3" wx:else />

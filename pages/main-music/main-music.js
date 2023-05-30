@@ -76,8 +76,9 @@ Page({
       })
   },
   onMoreClick(){
+    //推荐歌曲
     wx.navigateTo({
-      url: '/pages/detail-song/detail-song',
+      url: `/pages/detail-song/detail-song?type=recommend&key=recommendSongs`,
     })
   }
 

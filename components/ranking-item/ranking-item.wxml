@@ -1,7 +1,7 @@
 <wxs module="fmt" src="/utils/format.wxs">
   
 </wxs>
-<view class="ranking-item" wx:if="{{itemData.tracks}}">
+<view class="ranking-item" wx:if="{{itemData.tracks}}" bindtap="onItemClick">
   <view class="info">
     <view class="title">
       {{itemData.name}}
@@ -9,7 +9,7 @@
     <view class="songs">
       <block wx:for="{{3}}" wx:key="*this">
         <view class="song-info">
-          {{index+1}}.{{itemData.tracks[item].name}} - {{itemData.tracks[item].ar[0].name}}
+          {{index+1}}.{{itemData.tracks[item].name}} - {{fmt.formatArtistsName(itemData.tracks[item].ar)}}
         </view>
       </block>
     </view>

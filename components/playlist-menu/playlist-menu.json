@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
+    "van-skeleton": "@vant/weapp/skeleton/index",
     "area-header":"/components/area-header/area-header",
     "playlist-item-v1":"/components/playlist-item-v1/playlist-item-v1"
   }

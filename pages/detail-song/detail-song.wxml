@@ -1,2 +1,10 @@
-<!--pages/detail-song/detail-song.wxml-->
-<text>pages/detail-song/detail-song.wxml</text>
+<view class="detail-song">
+  <view class="header">
+   {{name}}
+  </view>
+  <view class="list">
+    <block wx:for="{{songs}}" wx:key="id">
+      <song-item-v2 itemData="{{item}}" index="{{index}}" />
+    </block>
+  </view>
+</view>

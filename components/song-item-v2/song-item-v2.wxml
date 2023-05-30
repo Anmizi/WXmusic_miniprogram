@@ -1,0 +1,17 @@
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="song-item">
+  <view class="index">
+    {{index + 1}}
+  </view>
+  <view class="info">
+    <view class="name">{{itemData.name}}</view>
+    <view class="bottom">
+      <image src="/assets/images/icons/sq_icon.png" class="icon" mode="widthFix" wx:if="{{itemData.sq}}" />
+      <view class="artist">
+        {{fmt.formatArtistsName(itemData.ar)}}
+      </view>
+    </view>
+  </view>
+</view>

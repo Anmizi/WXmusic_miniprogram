@@ -17,12 +17,12 @@
       </block>
     </view>
   </view>
-  <view class="ranking">
+  <!-- <view class="ranking">
     <area-header title="排行榜" hasMore="{{false}}" />
     <view class="list">
       <block wx:for="{{rankingInfo}}" wx:key="id">
-        <ranking-item itemData="{{item}}" />
+        <ranking-item itemData="{{item}}" key="{{index}}" />
       </block>
     </view>
-  </view>
+  </view> -->
 </view>
