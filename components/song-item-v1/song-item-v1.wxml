@@ -1,5 +1,5 @@
 <wxs module="fmt" src="/utils/format.wxs" />
-<view class="song-item">
+<view class="song-item" bindtap="onItemClick">
   <view class="cover">
     <image src="{{itemData.al.picUrl}}?param=200y200" lazy-load mode="widthFix" class="image"/>
   </view>

@@ -1,0 +1,46 @@
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="music-player">
+  <image src="{{song.al.picUrl}}" class="bgc" mode="aspectFill" />
+  <view class="mask"></view>
+  <nav-bar>
+    <view class="tabs" slot="center">
+      <view class="item {{currentPage === 0 ? 'active' : ''}}">歌曲</view>
+      <view class="line">
+        |
+      </view>
+      <view class="item {{currentPage === 1 ? 'active' : ''}}">歌词</view>
+    </view>
+  </nav-bar>
+  <swiper bindchange="onSwiperChange" style="height: {{contentHeight}}px;">
+    <swiper-item class="song">
+      <view class="cover">
+        <image src="{{song.al.picUrl}}" class="image" mode="widthFix" />
+      </view>
+      <view class="info">
+        <view class="name">{{song.name}}</view>
+        <view class="artist">{{song.ar[0].name}}</view>
+      </view>
+      <view class="lyric">
+        作曲: 赵雷 作词: 赵雷
+      </view>
+      <view class="progress">
+        <slider block-size="12" value="{{sliderValue}}" class="slider" bindchange="onSliderChange" bindchanging="onSliderChanging" />
+        <view class="time">
+          <view class="curent">{{fmt.formatTime(currentTime)}}</view>
+          <view class="end">{{fmt.formatTime(durationTime)}}</view>
+        </view>
+      </view>
+      <view class="control">
+        <image src="/assets/images/player/play_order.png" class="btn mode" mode="widthFix"/>
+        <image src="/assets/images/player/play_prev.png" class="btn prev" mode="widthFix"/>
+        <image src="/assets/images/player/play_pause.png" class="btn play" mode="widthFix"/>
+        <image src="/assets/images/player/play_next.png" class="btn next" mode="widthFix"/>
+        
+        <image src="/assets/images/player/play_music.png" class="btn music" mode="widthFix"/>
+      </view>
+    </swiper-item>
+    <swiper-item>歌词</swiper-item>
+  </swiper>
+</view>

@@ -1,0 +1,79 @@
+/* pages/music-player/music-player.wxss */
+.music-player,.bgc,.mask{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.music-player .mask{
+  background-color: rgba(0,0,0,.4);
+  backdrop-filter: blur(10rpx);
+  /* filter: blur(8px); */
+}
+.tabs{
+  display: flex;
+  font-size: 32rpx;
+  color: #aaa;
+}
+.tabs .active{
+  color: #fff;
+}
+.tabs > .line{
+  padding: 0 8rpx;
+}
+.song{
+  box-sizing: border-box;
+  padding: 20rpx 60rpx;
+  color: #fff;
+  overflow: hidden;
+}
+.song .cover{
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+.song .cover > .image{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.song .info{
+  margin-top: 40rpx;
+}
+.song .info > .name{
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  font-size: 40rpx;
+}
+.song .info > .artist{
+  font-size: 32rpx;
+  color: #aaa;
+}
+.song .lyric{
+  margin: 20rpx auto;
+  text-align: center;
+  font-size: 34rpx;
+}
+.song .progress > .slider{
+  margin: 0 10px;
+}
+.song .progress > .time{
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+.song .control{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.song .control > .btn{
+  width: 80rpx;
+}
+.song .control > .play{
+  width: 120rpx;
+}
