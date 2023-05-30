@@ -1,7 +1,7 @@
 <wxs module="fmt" src="/utils/format.wxs">
   
 </wxs>
-<view class="playlist-item">
+<view class="playlist-item" bindtap="onItemClick">
   <view class="cover">
     <image src="{{itemData.coverImgUrl}}?param=100y100" mode="widthFix" class="image"/>
     <view class="playcount">

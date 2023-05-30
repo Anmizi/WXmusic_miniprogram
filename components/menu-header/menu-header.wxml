@@ -1,0 +1,39 @@
+<wxs module="fmt" src="/utils/format.wxs">
+  
+</wxs>
+<view class="menu-header">
+  <image src="{{itemData.coverImgUrl}}" class="background" mode="widthFix" />
+  <view class="top">
+    <view class="cover">
+      <image src="{{itemData.coverImgUrl}}" mode="widthFix" />
+    </view>
+    <view class="info">
+      <view class="name">
+        {{itemData.name}}
+      </view>
+      <view class="creator">
+        <view class="avatar">
+          <image src="{{itemData.creator.avatarUrl}}" mode="widthFix" />
+        </view>
+        <view class="nickname">
+          {{itemData.creator.nickname}}
+        </view>
+      </view>
+      <view class="desc">
+          简介: {{itemData.description}}
+        </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="like">
+      <image src="/assets/images/icons/favor_icon.png" class="icon" mode="widthFix" />
+      <view class="count">{{fmt.formatCount(itemData.subscribedCount)}}</view>
+    </view>
+    <view class="share">
+      <image src="/assets/images/icons/share_icon.png" class="icon" mode="widthFix" />
+      <view class="text">
+        分享
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,6 +1,9 @@
 <view class="detail-song">
-  <view class="header">
-   {{name}}
+  <view class="menu-header" wx:if="{{type === 'menu'}}">
+     <menu-header itemData="{{playlist}}" />
+  </view>
+  <view class="header" wx:else>
+    {{name}}
   </view>
   <view class="list">
     <block wx:for="{{songs}}" wx:key="id">
