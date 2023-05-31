@@ -1,7 +1,7 @@
 <wxs module="fmt" src="/utils/format.wxs">
   
 </wxs>
-<view class="song-item">
+<view class="song-item" bindtap="onItemClick">
   <view class="index">
     {{index + 1}}
   </view>

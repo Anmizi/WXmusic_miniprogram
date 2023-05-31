@@ -5,7 +5,7 @@
       <view class="slot">
         <slot name="left"></slot>
       </view>
-      <view class="default">
+      <view class="default" bindtap="onGoBack">
         <image src="/assets/images/icons/arrow-left.png" mode="widthFix"/>
       </view>
     </view>

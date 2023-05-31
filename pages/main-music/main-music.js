@@ -7,6 +7,7 @@ import {
 } from '../../utils/query-selector';
 import {recommendStore} from '../../store/recommendStore'
 import {rankingStore} from '../../store/rankingStore'
+import {playlistStore} from '../../store/playlistStore'
 Page({
 
   /**
@@ -80,6 +81,12 @@ Page({
     wx.navigateTo({
       url: `/pages/detail-song/detail-song?type=recommend&key=recommendSongs`,
     })
+  },
+  //保持播放列表
+  onSavePlaylist(e){
+    const idx = e.currentTarget.dataset.index
+    playlistStore.setState('playSongList',this.data.recommendSongs)
+    playlistStore.setState('currentPlayIdx',idx)
   }
 
 })

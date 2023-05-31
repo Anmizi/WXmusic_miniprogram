@@ -8,6 +8,7 @@ import {
 import {
   getPlayListDetail
 } from '../../services/modules/music'
+import {playlistStore} from '../../store/playlistStore'
 Page({
 
   /**
@@ -74,6 +75,12 @@ Page({
   },
   handleFetchMenuData() {
     this.fetchMenuData()
+  },
+  onSavePlaylist(e){
+    const idx = e.currentTarget.dataset.index
+    playlistStore.setState('playSongList',this.data.songs)
+    playlistStore.setState('currentPlayIdx',idx)
+
   },
   onUnload() {},
 

@@ -6,6 +6,7 @@ import {
 import {
   lyricParse
 } from '../../utils/lyric-parse'
+import {playlistStore} from '../../store/playlistStore'
 const app = getApp()
 const audioContext = wx.createInnerAudioContext()
 Page({
@@ -26,7 +27,9 @@ Page({
     isSlidering: false,
     isPlaying: true,
     scrollTop: 0,
-    currentLyricIndex: -1
+    currentLyricIndex: -1,
+    playSongList:[],
+    currentPlayIdx:0
   },
 
   /**
@@ -42,37 +45,27 @@ Page({
     this.setData({
       id
     })
-    this.fetchSongDetail()
-    audioContext.src = `https://music.163.com/song/media/outer/url?id=${this.data.id}.mp3`
-    audioContext.autoplay = true
-    audioContext.onTimeUpdate(() => {
-      if (!this.data.isSlidering) {
-        const sliderValue = this.data.currentTime / this.data.durationTime * 100
-        this.setData({
-          currentTime: audioContext.currentTime * 1000,
-          sliderValue
-        })
+    this.handlePlaySong(id)
+    playlistStore.onStates(['playSongList','currentPlayIdx'],({playSongList,currentPlayIdx})=>{
+      if(playSongList){
+        this.setData({playSongList})
       }
-      this.updateLyric(audioContext.currentTime * 1000)
-
+      if(currentPlayIdx !== undefined){
+        this.setData({currentPlayIdx})
+      }
     })
-    audioContext.onWaiting(() => {
-      audioContext.pause()
-    })
-    audioContext.onCanplay(() => {
-      audioContext.autoplay && this.data.isPlaying && audioContext.play()
-    })
+    console.log('dddddddd');
   },
   //请求相关
-  fetchSongDetail() {
-    getMusicDetail(this.data.id)
+  fetchSongDetail(id) {
+    getMusicDetail(id)
       .then(res => {
         this.setData({
           song: res.songs[0],
           durationTime: res.songs[0].dt
         })
       })
-    getMusicLyric(this.data.id)
+    getMusicLyric(id)
       .then(res => {
 
         const lyricInfo = lyricParse(res.lrc.lyric)
@@ -150,6 +143,48 @@ Page({
     
     
 
+  },
+  onItemPrev(){
+    this.onItemToggle(false)
+  },
+  onItemNext(){
+    this.onItemToggle(true)
+  },
+  onItemToggle(isNext){
+    const length = this.data.playSongList.length
+    let index = isNext ? this.data.currentPlayIdx + 1 : this.data.currentPlayIdx - 1
+    if(index >= length){
+      index = 0
+    }else if(index < 0){
+      index = length - 1
+    }
+    const song = this.data.playSongList[index]
+    this.setData({currentPlayIdx:index,song})
+    playlistStore.setState('currentPlayIdx',index)
+    this.handlePlaySong(song.id)
+  },
+  handlePlaySong(id){
+    
+    this.fetchSongDetail(id)
+    audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+    audioContext.autoplay = true
+    audioContext.onTimeUpdate(() => {
+      if (!this.data.isSlidering) {
+        const sliderValue = this.data.currentTime / this.data.durationTime * 100
+        this.setData({
+          currentTime: audioContext.currentTime * 1000,
+          sliderValue
+        })
+      }
+      this.updateLyric(audioContext.currentTime * 1000)
+
+    })
+    audioContext.onWaiting(() => {
+      audioContext.pause()
+    })
+    audioContext.onCanplay(() => {
+      audioContext.autoplay && this.data.isPlaying && audioContext.play()
+    })
   }
 
 

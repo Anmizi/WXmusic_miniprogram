@@ -47,6 +47,9 @@
   font-weight: bold;
   margin-bottom: 10rpx;
   font-size: 40rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .song .info > .artist{
   font-size: 32rpx;
@@ -92,7 +95,6 @@
   font-size: 32rpx;
 }
 .lyric-list .item{
-  /* box-sizing: border-box; */
   margin: 0 20px;
   padding: 20rpx 0;
 }

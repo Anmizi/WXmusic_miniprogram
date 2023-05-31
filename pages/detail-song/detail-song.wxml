@@ -7,7 +7,7 @@
   </view>
   <view class="list">
     <block wx:for="{{songs}}" wx:key="id">
-      <song-item-v2 itemData="{{item}}" index="{{index}}" />
+      <song-item-v2 bindtap="onSavePlaylist" data-index="{{index}}" itemData="{{item}}" index="{{index}}" />
     </block>
   </view>
 </view>

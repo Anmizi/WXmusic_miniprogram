@@ -34,9 +34,9 @@
       </view>
       <view class="control">
         <image src="/assets/images/player/play_order.png" class="btn mode" mode="widthFix" />
-        <image src="/assets/images/player/play_prev.png" class="btn prev" mode="widthFix" />
+        <image src="/assets/images/player/play_prev.png" class="btn prev" mode="widthFix" bindtap="onItemPrev" />
         <image src="/assets/images/player/play_{{isPlaying ? 'pause' : 'resume'}}.png" class="btn play" mode="widthFix" bindtap="onPlayOrPause" />
-        <image src="/assets/images/player/play_next.png" class="btn next" mode="widthFix" />
+        <image src="/assets/images/player/play_next.png" bindtap="onItemNext" class="btn next" mode="widthFix" />
 
         <image src="/assets/images/player/play_music.png" class="btn music" mode="widthFix" />
       </view>
