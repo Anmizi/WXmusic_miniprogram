@@ -4,3 +4,6 @@ image{
   height: auto;
   vertical-align: top;
 }
+::-webkit-scrollbar{
+  display: none
+}

@@ -3,6 +3,9 @@ import {
   getMusicDetail,
   getMusicLyric
 } from '../../services/modules/player'
+import {
+  lyricParse
+} from '../../utils/lyric-parse'
 const app = getApp()
 const audioContext = wx.createInnerAudioContext()
 Page({
@@ -13,13 +16,17 @@ Page({
   data: {
     id: '',
     song: {},
-    lyric: '',
+    lyric: [],
+    lyricString: '',
     currentTime: 0,
     durationTime: 0,
     currentPage: 0,
     contentHeight: 0,
     sliderValue: 0,
-    isSlidering: false
+    isSlidering: false,
+    isPlaying: true,
+    scrollTop: 0,
+    currentLyricIndex: -1
   },
 
   /**
@@ -46,13 +53,14 @@ Page({
           sliderValue
         })
       }
+      this.updateLyric(audioContext.currentTime * 1000)
 
     })
     audioContext.onWaiting(() => {
       audioContext.pause()
     })
     audioContext.onCanplay(() => {
-      audioContext.play()
+      audioContext.autoplay && this.data.isPlaying && audioContext.play()
     })
   },
   //请求相关
@@ -66,11 +74,14 @@ Page({
       })
     getMusicLyric(this.data.id)
       .then(res => {
+
+        const lyricInfo = lyricParse(res.lrc.lyric)
         this.setData({
-          lyric: res.lrc.lyric
+          lyric: lyricInfo
         })
       })
   },
+  //事件处理
   onSwiperChange(e) {
     this.setData({
       currentPage: e.detail.current
@@ -87,7 +98,58 @@ Page({
   onSliderChanging(e) {
     this.data.isSlidering = true
     const currentTime = e.detail.value / 100 * this.data.durationTime
-    this.setData({currentTime})
+    this.setData({
+      currentTime
+    })
+  },
+  onNavClick(e) {
+    const index = e.currentTarget.dataset.index
+    this.setData({
+      currentPage: index
+    })
+  },
+  onPlayOrPause() {
+    if (this.data.isPlaying) {
+      this.setData({
+        isPlaying: false
+      })
+      audioContext.pause()
+    } else {
+      this.setData({
+        isPlaying: true
+      })
+      audioContext.play()
+    }
+  },
+  //其他方法
+  async updateLyric(currentTime) {
+    if (!this.data.lyric.length) return;
+    let index = this.data.lyric.findIndex(item => {
+      return item.time > currentTime
+    })
+    index = (index === -1) ? this.data.lyric.length - 1 : index - 1
+    if(index !== this.data.currentLyricIndex){
+      this.setData({
+        lyricString: this.data.lyric[index].text,
+        currentLyricIndex: index
+      })
+      const query = this.createSelectorQuery()
+      query.select('.lyric-list .item.active').boundingClientRect()
+      query.select('.lyric-list').scrollOffset()
+      query.exec(res=>{
+        const [rect,scrollRect] = res
+        let top = (rect && rect.top) || 0
+        let scrollTop = (scrollRect && scrollRect.scrollTop) || 0
+        const offsetTop = scrollTop + top
+        this.setData({scrollTop:offsetTop - this.data.contentHeight / 2})
+      })
+      
+    }
+    
+    
+    
+    
+
   }
 
 
