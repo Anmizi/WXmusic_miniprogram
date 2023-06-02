@@ -7,8 +7,8 @@
       </swiper-item>
     </swiper>
   </view>
-  <playlist-menu title="热门歌单" itemList="{{hotPlaylist}}"  />
-  <playlist-menu title="华语歌单" itemList="{{recommendPlaylist}}" />
+  <!-- <playlist-menu title="热门歌单" itemList="{{hotPlaylist}}"  />
+  <playlist-menu title="华语歌单" itemList="{{recommendPlaylist}}" /> -->
   <view class="recommend">
     <area-header title="推荐歌曲" bind:moreClick="onMoreClick" />
     <view class="list">
@@ -17,12 +17,12 @@
       </block>
     </view>
   </view>
-  <view class="ranking">
+  <!-- <view class="ranking">
     <area-header title="排行榜" hasMore="{{false}}" />
     <view class="list">
       <block wx:for="{{rankingInfo}}" wx:key="id">
         <ranking-item itemData="{{item}}" key="{{index}}" />
       </block>
     </view>
-  </view>
+  </view> -->
 </view>

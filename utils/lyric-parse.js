@@ -6,7 +6,7 @@ export const lyricParse = (lyricStr) => {
     const result = timeReg.exec(item)
     if(!result) return;
     const time = result[1] * 60 * 1000 + result[2] * 1000 + result[3] * 1
-    const text = item.replace(timeReg,'').trim()
+    const text = item.replace(timeReg,'')
     if(!text) return;
     res.push({
       time,

@@ -99,7 +99,7 @@
   padding: 20rpx 0;
 }
 .lyric-list .item.active{
-  color: #fff;
+  color: #00b26a;
   font-size: 34rpx;
   font-weight: bold;
 }

@@ -2,7 +2,7 @@
 
 </wxs>
 <view class="music-player">
-  <image src="{{song.al.picUrl}}" class="bgc" mode="aspectFill" />
+  <image src="{{song.al.picUrl}}?param=150y150" class="bgc" mode="aspectFill" />
   <view class="mask"></view>
   <nav-bar>
     <view class="tabs" slot="center">
@@ -16,7 +16,7 @@
   <swiper bindchange="onSwiperChange" current="{{currentPage}}" style="height: {{contentHeight}}px;">
     <swiper-item class="song">
       <view class="cover">
-        <image src="{{song.al.picUrl}}" class="image" mode="widthFix" />
+        <image src="{{song.al.picUrl}}?param=800y800" class="image" mode="widthFix" />
       </view>
       <view class="info">
         <view class="name">{{song.name}}</view>
@@ -33,7 +33,7 @@
         </view>
       </view>
       <view class="control">
-        <image src="/assets/images/player/play_order.png" class="btn mode" mode="widthFix" />
+        <image src="/assets/images/player/play_{{currentModeName}}.png" class="btn mode" mode="widthFix" bindtap="onChangePlayMode" />
         <image src="/assets/images/player/play_prev.png" class="btn prev" mode="widthFix" bindtap="onItemPrev" />
         <image src="/assets/images/player/play_{{isPlaying ? 'pause' : 'resume'}}.png" class="btn play" mode="widthFix" bindtap="onPlayOrPause" />
         <image src="/assets/images/player/play_next.png" bindtap="onItemNext" class="btn next" mode="widthFix" />
@@ -46,7 +46,7 @@
         <view style="padding-top: {{contentHeight / 2}}px;">
           
         </view>
-        <block wx:for="{{lyric}}" wx:key="time">
+        <block wx:for="{{lyric}}" wx:key="index">
           <view class="item {{currentLyricIndex === index ? 'active' : ''}}">
             {{item.text}}
           </view>
