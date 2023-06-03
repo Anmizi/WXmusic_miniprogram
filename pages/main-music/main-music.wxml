@@ -25,4 +25,22 @@
       </block>
     </view>
   </view> -->
+
+
+  <!-- 播放栏 -->
+  <view class="playbarholder" wx:if="{{song.name}}">
+    
+  </view>
+  <view class="playbar" wx:if="{{song.name}}" bindtap="onItemClick">
+    <view class="left">
+      <image src="{{song.al.picUrl}}" class="cover" mode="widthFix"/>
+      <view class="name">
+        {{song.name}}
+      </view>
+    </view>
+    <view class="right">
+      <image class="icon" catchtap="onPlayOrPause" src="/assets/images/music/{{isPlaying ? 'pause' : 'play'}}_icon.png" mode="widthFix"/>
+      <image class="icon" src="/assets/images/music/playlist_icon.png" mode="widthFix"/>
+    </view>
+  </view>
 </view>

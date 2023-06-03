@@ -121,7 +121,7 @@ const playlistStore = new HYEventStore({
       console.log(idx);
       ctx.currentPlayIdx = idx
       const id = ctx.playSongList[idx].id
-      playlistStore.dispatch('handlePlaySongAction',id)
+      this.dispatch('handlePlaySongAction',id)
     }
   }
 })

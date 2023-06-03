@@ -15,3 +15,62 @@ page{
 .recommend .list{
   overflow: hidden;
 }
+.playbarholder{
+  height:50px ;
+}
+.playbar{
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  margin: 0 -24rpx;
+}
+.playbar .left{
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+}
+.playbar .left > .cover{
+  position: relative;
+  top: -30rpx;
+  width: 100rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+  animation: animation 10s linear infinite;
+}
+
+.playbar .left > .name{
+  font-size: 32rpx;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-spacing: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.playbar .right{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.playbar .right > .icon{
+  width: 64rpx;
+  margin-right: 10rpx;
+}
+
+@keyframes animation {
+  from{
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}

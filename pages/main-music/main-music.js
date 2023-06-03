@@ -20,7 +20,9 @@ Page({
     recommendSongs:[],
     hotPlaylist:[],
     recommendPlaylist:[],
-    rankingInfo:{}
+    rankingInfo:{},
+    song:{},
+    isPlaying:false,
   },
 
   /**
@@ -32,6 +34,16 @@ Page({
     this.fetchHotPlaylist()
     this.fetchRecommendPlaylist()
     this.fetchRankingData()
+    playlistStore.onStates(['song','isPlaying'],this.getStateData)
+  },
+  getStateData(data){
+    const {song,isPlaying} = data
+    if(song){
+      this.setData({song})
+    }
+    if(isPlaying !== undefined){
+      this.setData({isPlaying})
+    }
   },
   //请求获取数据方法
   async fetchMusicBanner() {
@@ -87,6 +99,18 @@ Page({
     const idx = e.currentTarget.dataset.index
     playlistStore.setState('playSongList',this.data.recommendSongs)
     playlistStore.setState('currentPlayIdx',idx)
+  },
+  onPlayOrPause(){
+    playlistStore.dispatch('handlePlayOrPauseAction',!this.data.isPlaying)
+  },
+  onItemClick(e){
+    e.preventPa
+    wx.navigateTo({
+      url: '/pages/music-player/music-player',
+    })
+  },
+  onUnload(){
+    playlistStore.offState('song',this.getStateData)
   }
 
 })

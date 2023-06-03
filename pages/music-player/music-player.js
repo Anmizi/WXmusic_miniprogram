@@ -43,11 +43,11 @@ Page({
     const {
       id
     } = options
-    playlistStore.dispatch('handlePlaySongAction', id)
+    if (id) {
+      playlistStore.dispatch('handlePlaySongAction', id)
+    }
     //获取全局store数据
     playlistStore.onStates(this.data.stateKey, this.getStateData)
-    //处理歌曲播放
-    // this.handlePlaySong()
   },
   getStateData(data) {
     const {
@@ -55,31 +55,78 @@ Page({
       durationTime,
       currentLyricIndex,
       id,
-      currentMode
+      currentMode,
+      playSongList,
+      lyric,
+      lyricString,
+      isFirstPlay,
+      isPlaying,
+      song,
+      currentPlayIdx
     } = data
     if (currentTime) {
-      this.setData(currentTime)
+      const sliderValue = this.data.durationTime ? currentTime / this.data.durationTime * 100 : 0
+      this.setData({
+        currentTime,sliderValue
+      })
     }
     if (durationTime) {
       this.setData({
         durationTime
       })
     }
-    if (currentLyricIndex) {
+    if (currentLyricIndex !== undefined) {
       this.updateLyric()
       this.setData({
         currentLyricIndex
       })
     }
-    if(id){
-      this.setData({id})
+    if (currentPlayIdx !== undefined) {
+      this.setData({
+        currentPlayIdx
+      })
     }
-    if(currentMode !== undefined && currentMode >= 0){
-      this.setData({currentMode,currentModeName:modeMap[currentMode]})
+    if (id) {
+      this.setData({
+        id
+      })
     }
-    this.setData({
-      ...data
-    })
+    if (currentMode !== undefined && currentMode >= 0) {
+      this.setData({
+        currentMode,
+        currentModeName: modeMap[currentMode]
+      })
+    }
+    if (playSongList && playSongList.length) {
+      this.setData({
+        playSongList
+      })
+    }
+    if (lyric && lyric.length) {
+      this.setData({
+        lyric
+      })
+    }
+    if (lyricString !== undefined) {
+      this.setData({
+        lyricString
+      })
+    }
+    if (isFirstPlay !== undefined) {
+      this.setData({
+        isFirstPlay
+      })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({
+        isPlaying
+      })
+    }
+    if (song) {
+      this.setData({
+        song
+      })
+    }
   },
   updateLyric() {
     const query = this.createSelectorQuery()
@@ -104,8 +151,7 @@ Page({
   onSliderChange(e) {
     this.data.isSlidering = false
     const currentTime = e.detail.value / 100 * this.data.durationTime
-    playlistStore.dispatch('updateAudioContextAction',currentTime)
-    this.updateLyric()
+    playlistStore.dispatch('updateAudioContextAction', currentTime)
   },
   onSliderChanging(e) {
     this.data.isSlidering = true
@@ -118,9 +164,8 @@ Page({
     })
   },
   onPlayOrPause() {
-   playlistStore.dispatch('handlePlayOrPauseAction',!this.data.isPlaying)
+    playlistStore.dispatch('handlePlayOrPauseAction', !this.data.isPlaying)
   },
-  
   onItemPrev() {
     this.onItemToggle(false)
   },
@@ -128,56 +173,17 @@ Page({
     this.onItemToggle(true)
   },
   onItemToggle(isNext) {
-    playlistStore.dispatch('handleToggleSong',isNext)
-    this.setData({sliderValue:0})
+    playlistStore.dispatch('handleToggleSong', isNext)
+    this.setData({
+      sliderValue: 0
+    })
   },
   onChangePlayMode() {
     let index = this.data.currentMode + 1
     if (index === modeMap.length) {
       index = 0
     }
-    playlistStore.setState('currentMode',index)
-  },
-  handlePlaySong() {
-    //获取歌曲相关信息
-    this.fetchSongDetail()
-    //开始加载歌曲
-    this.handleLoadSong()
-
-  },
-  handleLoadSong() {
-    //加载歌曲
-    audioContext.stop()
-    audioContext.src = `https://music.163.com/song/media/outer/url?id=${this.data.id}.mp3`
-    //开启自动播放
-    audioContext.autoplay = true
-    //监听播放
-    //第一次播放监听
-    if (this.data.isFirstPlay) {
-      this.data.isFirstPlay = false
-      audioContext.onTimeUpdate(() => {
-        if (!this.data.isSlidering) {
-          const sliderValue = this.data.currentTime / this.data.durationTime * 100
-          this.setData({
-            currentTime: audioContext.currentTime * 1000,
-            sliderValue
-          })
-
-          this.updateLyric(audioContext.currentTime * 1000)
-        }
-
-      })
-      audioContext.onWaiting(() => {
-        audioContext.pause()
-      })
-      audioContext.onCanplay(() => {
-        audioContext.autoplay && this.data.isPlaying && audioContext.play()
-      })
-      audioContext.onEnded(() => {
-        this.onItemNext()
-      })
-    }
-
+    playlistStore.setState('currentMode', index)
   },
   onUnload() {
     playlistStore.offStates(this.data.stateKey, this.getStateData)
